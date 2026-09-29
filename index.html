@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Ogugu United Forum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-circle"><img src="assets/logo.jpeg" alt="Ogugu United Forum logo"></div>
+      <div class="header-text">
+        <p class="greeting-eyebrow" id="greetingEyebrow">Good evening,</p>
+        <h1 id="greetingName">ELIJAH</h1>
+        <p class="active-member">Active Member</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" data-action="open-notifications" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="badge" id="notifBadge" hidden>0</span>
+      </button>
+      <button class="avatar-btn" data-action="open-profile" aria-label="Open profile"><img id="headerAvatar" src="assets/profile-1.jpeg" alt=""></button>
+    </div>
+  </header>
+
+  <!-- ============ NOTIFICATION PANEL ============ -->
+  <aside class="side-panel" id="notifPanel" role="dialog" aria-label="Notifications" aria-hidden="true">
+    <div class="side-panel-header">
+      <h2>Notifications</h2>
+      <button id="closeNotif" class="panel-close" aria-label="Close notifications"><i data-lucide="x"></i></button>
+    </div>
+    <button class="mark-all-read" id="markAllRead">Mark all as read</button>
+    <ul class="notif-list" id="notifList"></ul>
+  </aside>
+
+  <!-- ============ VIEWS ============ -->
+  <main class="views" id="main">
+
+    <!-- HOME -->
+    <section class="view active" id="view-home" aria-label="Home">
+      <div class="content">
+
+        <button class="welcome-bar" data-action="open-welcome">
+          <i data-lucide="megaphone" class="welcome-icon"></i>
+          <span class="welcome-text"><strong>Welcome to Ogugu United Forum</strong><em>Unity &bull; Love &bull; Progress</em></span>
+          <i data-lucide="chevron-right" class="welcome-chevron"></i>
+        </button>
+
+        <section class="membership-card" aria-label="Membership card">
+          <div class="membership-watermark" aria-hidden="true"><img src="assets/logo.jpeg" alt=""></div>
+          <p class="membership-org">OGUGU UNITED FORUM</p>
+          <p class="membership-name" data-bind="fullName">ELIJAH AHMED</p>
+          <p class="membership-id" data-bind="membershipId">OUG-24-000567</p>
+          <div class="membership-meta">
+            <div><span>Status</span><p class="status-pill">ACTIVE</p></div>
+            <div><span>Valid until</span><p>31 Dec, 2026</p></div>
+          </div>
+          <div class="membership-meta membership-meta-bottom">
+            <div><span>Membership dues</span><p class="paid-text"><i data-lucide="check"></i> PAID</p></div>
+            <div><span>Next payment</span><p>31 Dec, 2026</p></div>
+          </div>
+          <button class="view-card-btn" data-action="open-card">View Membership Card</button>
+        </section>
+
+        <section class="quick-actions" aria-label="Quick actions">
+          <button class="quick-action" data-action="open-profile"><i data-lucide="user"></i><span>My Profile</span></button>
+          <button class="quick-action" data-action="pay-dues"><i data-lucide="wallet"></i><span>Pay Dues</span></button>
+          <button class="quick-action" data-nav="events"><i data-lucide="calendar"></i><span>My Events</span></button>
+          <button class="quick-action" data-action="open-card"><i data-lucide="id-card"></i><span>Membership</span></button>
+        </section>
+
+        <section class="wallet-card" aria-label="Forum wallet">
+          <div class="wallet-top">
+            <span class="wallet-label">Forum Wallet</span>
+            <button class="eye-toggle" data-action="toggle-balance" aria-label="Hide balance" aria-pressed="false"><i data-lucide="eye-off"></i></button>
+          </div>
+          <div class="wallet-mid">
+            <div>
+              <p class="wallet-balance" data-wallet-balance>₦12,450.00</p>
+              <p class="wallet-sub">Available balance</p>
+            </div>
+            <button class="add-money-btn" data-action="add-money">Add Money</button>
+          </div>
+          <button class="wallet-history" data-action="view-history">Transaction history <i data-lucide="arrow-right"></i></button>
+        </section>
+
+        <section class="pulse" aria-label="Community pulse">
+          <h2 class="pulse-title">Community Pulse</h2>
+          <div class="pulse-stats" id="homePulse"></div>
+        </section>
+
+        <section class="section-block" id="homeHappening"></section>
+        <section class="section-block" id="homeEvents"></section>
+        <section class="section-block" id="homeBirthdays"></section>
+        <section class="section-block" id="homeNewMembers"></section>
+        <section class="section-block" id="homeNews"></section>
+        <section class="section-block" id="homeGallery"></section>
+
+        <section class="quote-card">
+          <img class="quote-mark" src="assets/logo.jpeg" alt="">
+          <p class="quote-text">&ldquo;Alone we can do so little; together we can do so much.&rdquo;</p>
+          <p class="quote-attr">&mdash; Ogugu United Forum</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- COMMUNITY (feed + people) -->
+    <section class="view" id="view-community" aria-label="Community">
+      <div class="content">
+        <div class="page-head">
+          <h1 class="page-title">Community</h1>
+          <button class="chat-shortcut" data-nav="chat" aria-label="Messages">
+            <i data-lucide="message-circle"></i>
+            <span class="count-badge" data-chat-badge hidden>0</span>
+          </button>
+        </div>
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          <input type="search" id="communitySearch" placeholder="Search posts, members, branches..." aria-label="Search community">
+        </div>
+        <div class="pill-row" id="communityTabs" role="tablist" aria-label="Community sections">
+          <button class="pill-tab active" data-tab="feed" role="tab">Feed</button>
+          <button class="pill-tab" data-tab="members" role="tab">Members</button>
+          <button class="pill-tab" data-tab="branches" role="tab">Branches</button>
+          <button class="pill-tab" data-tab="directory" role="tab">Directory</button>
+        </div>
+        <div id="communityOutlet"></div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" id="view-events" aria-label="Events">
+      <div class="content">
+        <h1 class="page-title">Events</h1>
+        <div class="pill-row" role="tablist" aria-label="Event lists">
+          <button class="pill-tab active" data-event-tab="upcoming" role="tab">Upcoming</button>
+          <button class="pill-tab" data-event-tab="past" role="tab">Past Events</button>
+        </div>
+        <div id="eventsUpcoming"></div>
+        <div id="eventsPast" hidden></div>
+      </div>
+    </section>
+
+    <!-- PAYMENTS -->
+    <section class="view" id="view-payments" aria-label="Payments">
+      <div class="content">
+        <h1 class="page-title">Payments</h1>
+        <section class="dues-card">
+          <p class="dues-label">Membership Dues</p>
+          <p class="status-pill">PAID</p>
+          <p class="dues-next">Next payment: <strong>31 Dec, 2026</strong> &middot; &#8358;10,000</p>
+        </section>
+        <section class="wallet-card wallet-card-compact" aria-label="Forum wallet">
+          <div class="wallet-top">
+            <span class="wallet-label">Forum Wallet</span>
+            <button class="eye-toggle" data-action="toggle-balance" aria-label="Hide balance" aria-pressed="false"><i data-lucide="eye-off"></i></button>
+          </div>
+          <div class="wallet-mid">
+            <div>
+              <p class="wallet-balance" data-wallet-balance>₦12,450.00</p>
+              <p class="wallet-sub">Available balance</p>
+            </div>
+            <button class="add-money-btn" data-action="add-money">Add Money</button>
+          </div>
+        </section>
+        <section class="section-block">
+          <h2 class="section-title">Payment History</h2>
+          <ul class="txn-list" id="txnList"></ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- CHAT -->
+    <section class="view" id="view-chat" aria-label="Chat">
+      <div class="chat-layout" id="chatLayout">
+        <aside class="chat-list-pane" id="chatListPane" aria-label="Conversations">
+          <div class="chat-list-head">
+            <h1 class="page-title">Chats</h1>
+            <button class="small-btn" data-action="new-chat">New Chat</button>
+          </div>
+          <div class="search-bar">
+            <i data-lucide="search"></i>
+            <input type="search" id="chatSearch" placeholder="Search conversations..." aria-label="Search conversations">
+          </div>
+          <div id="chatList"></div>
+        </aside>
+        <section class="chat-conv-pane" id="chatConvPane" aria-label="Conversation"></section>
+      </div>
+    </section>
+
+    <!-- MORE (rendered by app.js) -->
+    <section class="view" id="view-more" aria-label="More">
+      <div class="content" id="moreOutlet"></div>
+    </section>
+
+  </main>
+
+  <!-- ============ BOTTOM NAVIGATION ============ -->
+  <nav class="bottom-nav" aria-label="Main">
+    <button class="nav-item active" data-nav="home" aria-current="page"><i data-lucide="home"></i><span>Home</span></button>
+    <button class="nav-item" data-nav="community"><i data-lucide="users"></i><span>Community</span></button>
+    <button class="nav-item" data-nav="events"><i data-lucide="calendar"></i><span>Events</span></button>
+    <button class="nav-item" data-nav="payments"><i data-lucide="wallet"></i><span>Payments</span></button>
+    <button class="nav-item" data-nav="more"><i data-lucide="grid-2x2"></i><span>More</span></button>
+  </nav>
+</div>
+
+<!-- ============ MODALS ============ -->
+<div class="modal-overlay" id="modalOverlay">
+
+  <div class="modal" id="modal-card" role="dialog" aria-modal="true" aria-labelledby="cardTitle">
+    <div class="modal-header"><h3 id="cardTitle">Membership Card</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="mini-card">
+        <div class="membership-watermark" aria-hidden="true"><img src="assets/logo.png" alt=""></div>
+        <p class="membership-org">OGUGU UNITED FORUM</p>
+        <p class="membership-name" data-bind="fullName">ELIJAH AHMED</p>
+        <p class="membership-id" data-bind="membershipId">OUG-24-000567</p>
+        <div class="membership-meta">
+          <div><span>Status</span><p class="status-pill">ACTIVE</p></div>
+          <div><span>Valid until</span><p>31 Dec, 2026</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-addmoney" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="modal-header"><h3 id="addTitle">Add Money to Forum Wallet</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <p class="modal-text mock-note">Prototype only. no real payment is made.</p>
+      <div class="preset-row">
+        <button type="button" class="preset-btn" data-preset="1000">₦1,000</button>
+        <button type="button" class="preset-btn" data-preset="2000">₦2,000</button>
+        <button type="button" class="preset-btn" data-preset="5000">₦5,000</button>
+        <button type="button" class="preset-btn" data-preset="10000">₦10,000</button>
+      </div>
+      <label class="modal-label" for="amountInput">Amount (&#8358;)</label>
+      <input type="number" id="amountInput" class="modal-input" placeholder="Enter amount" min="1" inputmode="numeric">
+      <div class="modal-actions">
+        <button class="modal-btn-secondary" data-close>Cancel</button>
+        <button class="modal-btn-primary" id="confirmAddMoney">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal modal-lg" id="modal-profile" role="dialog" aria-modal="true" aria-labelledby="profTitle">
+    <div class="modal-header"><h3 id="profTitle">Profile</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="profile-view" id="profileView">
+        <div class="profile-photo-container">
+          <div class="avatar-lg"><img id="profileViewPhoto" src="assets/profile-1.jpeg" alt=""></div>
+        </div>
+        <p class="profile-name" id="profileViewName">Elijah Ahmed</p>
+        <div class="profile-rows" id="profileViewRows"></div>
+        <div class="profile-section-title">COMMUNITY ACTIVITY</div>
+        <div id="profileActivityFeed" class="feed-list profile-feed"></div>
+        <button class="modal-btn-primary" id="editProfileBtn" style="margin-top:16px">Edit Profile</button>
+      </div>
+
+      <form class="profile-edit" id="profileEdit" hidden>
+        <div class="photo-edit-box">
+          <div class="avatar-lg"><img id="editPhotoPreview" src="assets/profile-1.jpeg" alt="Profile preview"></div>
+          <div class="photo-edit-actions">
+            <button type="button" class="small-btn" id="changePhotoBtn"><i data-lucide="camera"></i> Change Photo</button>
+            <button type="button" class="small-btn btn-text-danger" id="removePhotoBtn"><i data-lucide="trash-2"></i> Remove</button>
+            <input type="file" id="editPhotoInput" accept="image/*" hidden>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editFirstName">First Name</label>
+            <input class="modal-input" id="editFirstName" type="text" required maxlength="40">
+          </div>
+          <div>
+            <label class="modal-label" for="editMiddleName">Middle Name</label>
+            <input class="modal-input" id="editMiddleName" type="text" maxlength="40">
+          </div>
+          <div>
+            <label class="modal-label" for="editLastName">Last Name</label>
+            <input class="modal-input" id="editLastName" type="text" required maxlength="40">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editPhone">Phone</label>
+            <input class="modal-input" id="editPhone" type="tel" maxlength="30">
+          </div>
+          <div>
+            <label class="modal-label" for="editEmail">Email</label>
+            <input class="modal-input" id="editEmail" type="email" maxlength="80">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editGender">Gender</label>
+            <select class="modal-input" id="editGender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label class="modal-label" for="editDob">Date of Birth</label>
+            <input class="modal-input" id="editDob" type="date">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editMaritalStatus">Marital Status</label>
+            <select class="modal-input" id="editMaritalStatus">
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div id="editSpouseNameWrap" hidden>
+            <label class="modal-label" for="editSpouseName">Spouse Name (Optional)</label>
+            <input class="modal-input" id="editSpouseName" type="text" maxlength="60">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editOccupation">Occupation</label>
+            <input class="modal-input" id="editOccupation" type="text" maxlength="60">
+          </div>
+          <div>
+            <label class="modal-label" for="editCompany">Company / Organization</label>
+            <input class="modal-input" id="editCompany" type="text" maxlength="60">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label class="modal-label" for="editLocation">Residential Location</label>
+            <input class="modal-input" id="editLocation" type="text" maxlength="60" placeholder="e.g. Ikeja">
+          </div>
+          <div>
+            <label class="modal-label" for="editState">State</label>
+            <input class="modal-input" id="editState" type="text" maxlength="60" placeholder="e.g. Lagos">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+          <label class="modal-label" for="editCountry">Country</label>
+          <input class="modal-input" id="editCountry" type="text" maxlength="60" value="Nigeria">
+        </div>
+
+        <div class="privacy-settings-box">
+          <p class="privacy-box-title">Privacy Controls</p>
+          <div class="privacy-row">
+            <span>Phone number</span>
+            <select class="privacy-select" id="privPhone">
+              <option value="private">Private</option>
+              <option value="public">Public</option>
+            </select>
+          </div>
+          <div class="privacy-row">
+            <span>Email address</span>
+            <select class="privacy-select" id="privEmail">
+              <option value="private">Private</option>
+              <option value="public">Public</option>
+            </select>
+          </div>
+          <div class="privacy-row">
+            <span>Occupation &amp; Company</span>
+            <select class="privacy-select" id="privOccupation">
+              <option value="members">Visible to Members</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+          <div class="privacy-row">
+            <span>Marital Status</span>
+            <select class="privacy-select" id="privMarital">
+              <option value="members">Visible to Members</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+          <div class="privacy-row">
+            <span>Location</span>
+            <select class="privacy-select" id="privLocation">
+              <option value="members">Visible to Members</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="read-only-notice">
+          <p><strong>Community Controlled Fields:</strong> Membership ID, Status, Join Date, and Branch assignment can only be updated by Forum Administration.</p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-btn-secondary" id="cancelEditProfile">Cancel</button>
+          <button type="submit" class="modal-btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-welcome" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="modal-header"><h3 id="welcomeTitle">Announcement</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <p class="modal-text">Welcome to Ogugu United Forum &mdash; a community built on Unity, Love and Progress. Stay connected with your branch, your members, and everything happening across the forum right here.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-detail" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal-header"><h3 id="detailTitle">Details</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body" id="detailBody"></div>
+  </div>
+
+  <div class="modal modal-sheet" id="modal-comments" role="dialog" aria-modal="true" aria-labelledby="commentsTitle">
+    <div class="modal-header"><h3 id="commentsTitle">Post</h3><button class="modal-close" data-close aria-label="Close post"><i data-lucide="x"></i></button></div>
+    <div class="modal-body sheet-body" id="commentsBody"></div>
+  </div>
+
+  <div class="modal" id="modal-post" role="dialog" aria-modal="true" aria-labelledby="postModalTitle">
+    <div class="modal-header"><h3 id="postModalTitle">Create Post</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <form class="modal-body" id="postForm">
+      <div class="composer-who" id="composerWho"></div>
+      <div class="composer-audience-picker">
+        <label class="modal-label" for="postAudienceSelect">Post to:</label>
+        <select id="postAudienceSelect" class="modal-input audience-select"></select>
+      </div>
+      <label class="sr-only" for="postText">What's on your mind?</label>
+      <textarea id="postText" class="post-textarea" rows="4" maxlength="1000" placeholder="What's on your mind?"></textarea>
+      <div class="post-previews" id="postPreviews"></div>
+      <div class="composer-tools">
+        <button type="button" class="attach-btn" id="attachBtn"><i data-lucide="image"></i> Add photo</button>
+        <input type="file" id="postImages" accept="image/*" multiple hidden>
+        <span class="char-count" id="postCount">0/1000</span>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn-secondary" data-close>Cancel</button>
+        <button type="submit" class="modal-btn-primary" id="postSubmit" disabled>Post</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal" id="modal-share" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="modal-header"><h3 id="shareTitle">Share post</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body share-options">
+      <button class="share-row" data-share="copy"><span>Copy Link</span></button>
+      <button class="share-row" data-share="whatsapp"><span>Share to WhatsApp</span></button>
+      <button class="share-row" data-share="native"><span>Share&hellip;</span></button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-confirm" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+    <div class="modal-header"><h3 id="confirmTitle">Confirm</h3></div>
+    <div class="modal-body">
+      <p class="modal-text" id="confirmMessage"></p>
+      <div class="modal-actions" style="margin-top:18px">
+        <button class="modal-btn-secondary" id="confirmCancel">Cancel</button>
+        <button class="modal-btn-primary" id="confirmOk">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-newchat" role="dialog" aria-modal="true" aria-labelledby="newChatTitle">
+    <div class="modal-header"><h3 id="newChatTitle">New Chat</h3><button class="modal-close" data-close aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="search-bar"><i data-lucide="search"></i><input type="search" id="newChatSearch" placeholder="Search members..." aria-label="Search members"></div>
+      <div class="member-list newchat-list" id="newChatList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer"><i data-lucide="x"></i></button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+  <div class="lightbox-content">
+    <img id="lightboxImage" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/mock-data.js"></script>
+<script src="js/services.js"></script>
+<script src="js/services/post-service.js"></script>
+<script src="js/services/comment-service.js"></script>
+<script src="js/services/chat-service.js"></script>
+<script src="js/services/notification-service.js"></script>
+<script src="js/router.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/feed.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
